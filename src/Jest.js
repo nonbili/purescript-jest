@@ -4,14 +4,8 @@ exports.test_ = function(name, fn) {
   });
 };
 
-exports.expectToBe_ = function(eq) {
+exports.expectToEqual_ = function(Eq) {
   return function(received, expected) {
-    expect(received).toBe(expected);
-  };
-};
-
-exports.expectToEqual_ = function(eq) {
-  return function(received, expected) {
-    expect(received).toEqual(expected);
+    expect(Eq.eq(received, expected)).toBeTruthy();
   };
 };
