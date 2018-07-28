@@ -1,6 +1,7 @@
 module Jest
   ( test
   , expectToBe
+  , expectToEqual
   ) where
 
 import Prelude
@@ -15,3 +16,7 @@ test = runEffectFn2 test_
 foreign import expectToBe_ :: forall a. Eq a => EffectFn2 a a Unit
 expectToBe :: forall a. Eq a => a -> a -> Effect Unit
 expectToBe = runEffectFn2 expectToBe_
+
+foreign import expectToEqual_ :: forall a. Eq a => EffectFn2 a a Unit
+expectToEqual :: forall a. Eq a => a -> a -> Effect Unit
+expectToEqual = runEffectFn2 expectToEqual_

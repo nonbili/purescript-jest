@@ -9,3 +9,9 @@ exports.expectToBe_ = function(eq) {
     expect(received).toBe(expected);
   };
 };
+
+exports.expectToEqual_ = function(eq) {
+  return function(received, expected) {
+    expect(received).toEqual(expected);
+  };
+};
