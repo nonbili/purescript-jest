@@ -1,3 +1,9 @@
+exports.describe_ = function(name, fn) {
+  describe(name, function() {
+    fn();
+  });
+};
+
 exports.test_ = function(name, fn) {
   test(name, function() {
     fn();

@@ -1,5 +1,6 @@
 module Jest
-  ( test
+  ( describe
+  , test
   , expectToEqual
   , expectToNotEqual
   , expectToBeClose
@@ -11,6 +12,10 @@ import Prelude
 
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, runEffectFn1, runEffectFn2)
+
+foreign import describe_ :: EffectFn2 String (Effect Unit) Unit
+describe :: String -> Effect Unit -> Effect Unit
+describe = runEffectFn2 describe_
 
 foreign import test_ :: EffectFn2 String (Effect Unit) Unit
 test :: String -> Effect Unit -> Effect Unit
