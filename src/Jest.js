@@ -4,8 +4,32 @@ exports.describe_ = function(name, fn) {
   });
 };
 
+exports.describeOnly_ = function(name, fn) {
+  describe.only(name, function() {
+    fn();
+  });
+};
+
+exports.describeSkip_ = function(name, fn) {
+  describe.skip(name, function() {
+    fn();
+  });
+};
+
 exports.test_ = function(name, fn) {
   test(name, function() {
+    fn();
+  });
+};
+
+exports.testOnly_ = function(name, fn) {
+  test.only(name, function() {
+    fn();
+  });
+};
+
+exports.testSkip_ = function(name, fn) {
+  test.skip(name, function() {
     fn();
   });
 };
