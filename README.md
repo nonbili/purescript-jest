@@ -8,6 +8,8 @@ A PureScript wrapper of [Jest](https://jestjs.io/).
 ## Supported matchers
 
 - expectToEqual
+- expectToNotEqual
+- expectToBeClose
 - expectToBeTrue
 - expectToBeFalse
 

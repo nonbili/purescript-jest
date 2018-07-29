@@ -19,13 +19,13 @@ main = do
   test "expectToEqual" $ do
     expectToEqual { x: 1, y: 2 } { x: 1, y: 2}
 
-  test "expectToBeClose" $ do
-    expectToBeClose (0.1 + 0.2) 0.3
-
   test "expectToNotEqual" $ do
     expectToNotEqual 3 2
     expectToNotEqual { x: 2, y: 1 } { x: 1, y: 2}
     expectToNotEqual (0.1 + 0.2) 0.3
+
+  test "expectToBeClose" $ do
+    expectToBeClose (0.1 + 0.2) 0.3
 
   test "expectToBeTrue" $ do
     expectToBeTrue (3 > 2)
