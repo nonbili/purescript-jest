@@ -6,14 +6,20 @@ exports.test_ = function(name, fn) {
 
 exports.expectToEqual_ = function(Eq) {
   return function(received, expected) {
-    expect(Eq.eq(received, expected)).toBeTruthy();
+    expect(Eq.eq(received)(expected)).toBe(true);
   };
 };
 
-exports.expectToBeTruthy_ = function(received) {
-  expect(received).toBeTruthy();
+exports.expectToNotEqual_ = function(Eq) {
+  return function(received, expected) {
+    expect(Eq.eq(received)(expected)).toBe(false);
+  };
 };
 
-exports.expectToBeFalsy_ = function(received) {
-  expect(received).toBeFalsy();
+exports.expectToBeTrue_ = function(received) {
+  expect(received).toBe(true);
+};
+
+exports.expectToBeFalse_ = function(received) {
+  expect(received).toBe(false);
 };

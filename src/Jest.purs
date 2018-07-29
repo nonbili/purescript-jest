@@ -1,6 +1,7 @@
 module Jest
   ( test
   , expectToEqual
+  , expectToNotEqual
   , expectToBeTrue
   , expectToBeFalse
   ) where
@@ -18,10 +19,14 @@ foreign import expectToEqual_ :: forall a. Eq a => EffectFn2 a a Unit
 expectToEqual :: forall a. Eq a => a -> a -> Effect Unit
 expectToEqual = runEffectFn2 expectToEqual_
 
-foreign import expectToBeTruthy_ :: EffectFn1 Boolean Unit
-expectToBeTrue :: Boolean -> Effect Unit
-expectToBeTrue = runEffectFn1 expectToBeTruthy_
+foreign import expectToNotEqual_ :: forall a. Eq a => EffectFn2 a a Unit
+expectToNotEqual :: forall a. Eq a => a -> a -> Effect Unit
+expectToNotEqual = runEffectFn2 expectToNotEqual_
 
-foreign import expectToBeFalsy_ :: EffectFn1 Boolean Unit
+foreign import expectToBeTrue_ :: EffectFn1 Boolean Unit
+expectToBeTrue :: Boolean -> Effect Unit
+expectToBeTrue = runEffectFn1 expectToBeTrue_
+
+foreign import expectToBeFalse_ :: EffectFn1 Boolean Unit
 expectToBeFalse :: Boolean -> Effect Unit
-expectToBeFalse = runEffectFn1 expectToBeFalsy_
+expectToBeFalse = runEffectFn1 expectToBeFalse_

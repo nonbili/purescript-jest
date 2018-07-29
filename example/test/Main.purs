@@ -4,7 +4,7 @@ import Prelude
 
 import Effect (Effect)
 import Example (sum, mkPoint)
-import Jest (expectToEqual, expectToBeTrue, expectToBeFalse, test)
+import Jest (expectToEqual, expectToNotEqual, expectToBeTrue, expectToBeFalse, test)
 
 main :: Effect Unit
 main = do
@@ -14,7 +14,13 @@ main = do
 
   test "mkPoint" $ do
     expectToEqual (mkPoint 1 2) { x: 1, y: 2 }
-    expectToEqual (mkPoint 22 11) { x: 22, y: 11 }
+
+  test "expectToEqual" $ do
+    expectToEqual { x: 1, y: 2 } { x: 1, y: 2}
+
+  test "expectToNotEqual" $ do
+    expectToNotEqual 3 2
+    expectToNotEqual { x: 2, y: 1 } { x: 1, y: 2}
 
   test "expectToBeTrue" $ do
     expectToBeTrue (3 > 2)
