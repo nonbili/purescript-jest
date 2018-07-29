@@ -7,7 +7,9 @@ A PureScript wrapper of [Jest](https://jestjs.io/).
 
 ## Supported matchers
 
-- [x] expectToEqual
+- expectToEqual
+- expectToBeTrue
+- expectToBeFalse
 
 
 Check `example` folder to see how to use.
