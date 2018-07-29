@@ -2,6 +2,7 @@ module Jest
   ( test
   , expectToEqual
   , expectToNotEqual
+  , expectToBeClose
   , expectToBeTrue
   , expectToBeFalse
   ) where
@@ -22,6 +23,11 @@ expectToEqual = runEffectFn2 expectToEqual_
 foreign import expectToNotEqual_ :: forall a. Eq a => EffectFn2 a a Unit
 expectToNotEqual :: forall a. Eq a => a -> a -> Effect Unit
 expectToNotEqual = runEffectFn2 expectToNotEqual_
+
+-- | https://jestjs.io/docs/en/expect#tobeclosetonumber-numdigits
+expectToBeClose :: Number -> Number -> Effect Unit
+expectToBeClose = runEffectFn2 expectToBeClose_
+foreign import expectToBeClose_ :: EffectFn2 Number Number Unit
 
 foreign import expectToBeTrue_ :: EffectFn1 Boolean Unit
 expectToBeTrue :: Boolean -> Effect Unit

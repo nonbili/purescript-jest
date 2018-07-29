@@ -16,6 +16,10 @@ exports.expectToNotEqual_ = function(Eq) {
   };
 };
 
+exports.expectToBeClose_ = function(received, expected) {
+  expect(received).toBeCloseTo(expected);
+};
+
 exports.expectToBeTrue_ = function(received) {
   expect(received).toBe(true);
 };
