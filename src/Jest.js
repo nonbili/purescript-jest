@@ -36,12 +36,20 @@ exports.testSkip_ = function(name, fn) {
 
 exports.expectToEqual_ = function(Eq) {
   return function(received, expected) {
+    if (!Eq.eq(received)(expected)) {
+      console.error("Expected: ", expected);
+      console.error("Received: ", received);
+    }
     expect(Eq.eq(received)(expected)).toBe(true);
   };
 };
 
 exports.expectToNotEqual_ = function(Eq) {
   return function(received, expected) {
+    if (Eq.eq(received)(expected)) {
+      console.error("Expected: ", expected);
+      console.error("Received: ", received);
+    }
     expect(Eq.eq(received)(expected)).toBe(false);
   };
 };
