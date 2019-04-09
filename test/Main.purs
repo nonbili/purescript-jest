@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import Example (sum, mkPoint)
+import Example (sum, mkPoint, asyncSum)
 import Jest (describe, expectToBeClose, expectToBeFalse, expectToBeTrue, expectToEqual, expectToNotEqual, test)
 
 main :: Effect Unit
@@ -32,3 +32,7 @@ main = do
 
   test "expectToBeFalse" $ do
     expectToBeFalse (3 < 2)
+
+  test "asyncSum" $ do
+    v <- asyncSum 1 2
+    expectToEqual v 3
