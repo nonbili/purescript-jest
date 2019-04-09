@@ -2,6 +2,7 @@
   "private": true,
   "license": "BSD-3-Clause",
   "scripts": {
+    "postinstall": "bower install",
     "test": "pulp build -I test && jest"
   },
   "devDependencies": {

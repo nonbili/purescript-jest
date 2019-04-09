@@ -10,26 +10,20 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - deps-{{ checksum "bower.json" }}-{{ checksum "example/bower.json" }}-{{ checksum "example/package.json" }}
+          - deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}
 
       - run:
           command: |
-            yarn add --dev bower
-            yarn bower install
-            yarn bower link
+            yarn add --dev bower purescript pulp
+            yarn
 
       - save_cache:
           paths:
             - node_modules
             - bower_components
-            - example/node_modules
-            - example/bower_components
-          key: deps-{{ checksum "bower.json" }}-{{ checksum "example/bower.json" }}-{{ checksum "example/package.json" }}
+            - output
+          key: deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}
 
       - run:
-          working_directory: example
           command: |
-            yarn add --dev bower purescript pulp
-            yarn bower link purescript-jest
-            yarn
             yarn test
