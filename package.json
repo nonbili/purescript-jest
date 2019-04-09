@@ -3,9 +3,11 @@
   "license": "BSD-3-Clause",
   "scripts": {
     "postinstall": "bower install",
-    "test": "pulp build -I test && jest"
+    "test": "pulp build -I test && jest",
+    "test:ci": "pulp build -I test -- --strict --stash +RTS -N2 -RTS"
   },
   "devDependencies": {
-    "jest": "^23.4.2"
+    "jest": "^23.4.2",
+    "purescript-psa": "^0.7.3"
   }
 }
