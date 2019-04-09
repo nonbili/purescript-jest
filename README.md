@@ -14,4 +14,4 @@ A PureScript wrapper of [Jest](https://jestjs.io/).
 - expectToBeFalse
 
 
-Check `example` folder to see how to use.
+Check `test` folder to see how to use.
