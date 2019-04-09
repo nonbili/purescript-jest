@@ -1,56 +1,36 @@
 exports.describe_ = function(name, fn) {
-  describe(name, function() {
-    fn();
-  });
+  describe(name, fn);
 };
 
 exports.describeOnly_ = function(name, fn) {
-  describe.only(name, function() {
-    fn();
-  });
+  describe.only(name, fn);
 };
 
 exports.describeSkip_ = function(name, fn) {
-  describe.skip(name, function() {
-    fn();
-  });
+  describe.skip(name, fn);
 };
 
 exports.test_ = function(name, fn) {
-  test(name, function() {
-    fn();
-  });
+  test(name, fn);
 };
 
 exports.testOnly_ = function(name, fn) {
-  test.only(name, function() {
-    fn();
-  });
+  test.only(name, fn);
 };
 
 exports.testSkip_ = function(name, fn) {
-  test.skip(name, function() {
-    fn();
-  });
+  test.skip(name, fn);
 };
 
-exports.expectToEqual_ = function(Eq) {
+exports.expectToEqual_ = function() {
   return function(received, expected) {
-    if (!Eq.eq(received)(expected)) {
-      console.error("Expected: ", expected);
-      console.error("Received: ", received);
-    }
-    expect(Eq.eq(received)(expected)).toBe(true);
+    expect(received).toEqual(expected);
   };
 };
 
-exports.expectToNotEqual_ = function(Eq) {
+exports.expectToNotEqual_ = function() {
   return function(received, expected) {
-    if (Eq.eq(received)(expected)) {
-      console.error("Expected: ", expected);
-      console.error("Received: ", received);
-    }
-    expect(Eq.eq(received)(expected)).toBe(false);
+    expect(received).not.toEqual(expected);
   };
 };
 

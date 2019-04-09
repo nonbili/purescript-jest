@@ -14,7 +14,10 @@ module Jest
 
 import Prelude
 
+import Control.Promise (Promise, fromAff)
 import Effect (Effect)
+import Effect.Aff (Aff)
+import Effect.Class (liftEffect)
 import Effect.Uncurried (EffectFn1, EffectFn2, runEffectFn1, runEffectFn2)
 
 foreign import describe_ :: EffectFn2 String (Effect Unit) Unit
@@ -29,35 +32,35 @@ foreign import describeSkip_ :: EffectFn2 String (Effect Unit) Unit
 describeSkip :: String -> Effect Unit -> Effect Unit
 describeSkip = runEffectFn2 describeSkip_
 
-foreign import test_ :: EffectFn2 String (Effect Unit) Unit
-test :: String -> Effect Unit -> Effect Unit
-test = runEffectFn2 test_
+foreign import test_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+test :: String -> Aff Unit -> Effect Unit
+test name action = runEffectFn2 test_ name (fromAff action)
 
-foreign import testOnly_ :: EffectFn2 String (Effect Unit) Unit
-testOnly :: String -> Effect Unit -> Effect Unit
-testOnly = runEffectFn2 testOnly_
+foreign import testOnly_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+testOnly :: String -> Aff Unit -> Effect Unit
+testOnly name action = runEffectFn2 testOnly_ name (fromAff action)
 
-foreign import testSkip_ :: EffectFn2 String (Effect Unit) Unit
-testSkip :: String -> Effect Unit -> Effect Unit
-testSkip = runEffectFn2 testSkip_
+foreign import testSkip_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+testSkip :: String -> Aff Unit -> Effect Unit
+testSkip name action = runEffectFn2 testSkip_ name (fromAff action)
 
 foreign import expectToEqual_ :: forall a. Eq a => EffectFn2 a a Unit
-expectToEqual :: forall a. Eq a => a -> a -> Effect Unit
-expectToEqual = runEffectFn2 expectToEqual_
+expectToEqual :: forall a. Eq a => a -> a -> Aff Unit
+expectToEqual = (compose liftEffect) <<< runEffectFn2 expectToEqual_
 
 foreign import expectToNotEqual_ :: forall a. Eq a => EffectFn2 a a Unit
-expectToNotEqual :: forall a. Eq a => a -> a -> Effect Unit
-expectToNotEqual = runEffectFn2 expectToNotEqual_
+expectToNotEqual :: forall a. Eq a => a -> a -> Aff Unit
+expectToNotEqual = (compose liftEffect) <<< runEffectFn2 expectToNotEqual_
 
 -- | https://jestjs.io/docs/en/expect#tobeclosetonumber-numdigits
-expectToBeClose :: Number -> Number -> Effect Unit
-expectToBeClose = runEffectFn2 expectToBeClose_
 foreign import expectToBeClose_ :: EffectFn2 Number Number Unit
+expectToBeClose :: Number -> Number -> Aff Unit
+expectToBeClose = (compose liftEffect) <<< runEffectFn2 expectToBeClose_
 
 foreign import expectToBeTrue_ :: EffectFn1 Boolean Unit
-expectToBeTrue :: Boolean -> Effect Unit
-expectToBeTrue = runEffectFn1 expectToBeTrue_
+expectToBeTrue :: Boolean -> Aff Unit
+expectToBeTrue = liftEffect <<< runEffectFn1 expectToBeTrue_
 
 foreign import expectToBeFalse_ :: EffectFn1 Boolean Unit
-expectToBeFalse :: Boolean -> Effect Unit
-expectToBeFalse = runEffectFn1 expectToBeFalse_
+expectToBeFalse :: Boolean -> Aff Unit
+expectToBeFalse = liftEffect <<< runEffectFn1 expectToBeFalse_

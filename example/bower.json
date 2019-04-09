@@ -8,7 +8,9 @@
     "output"
   ],
   "dependencies": {
-    "purescript-prelude": "^4.0.0",
-    "purescript-jest": "*"
+    "purescript-prelude": "^4.1.0",
+    "purescript-effect": "^2.0.0",
+    "purescript-aff": "^5.1.1",
+    "purescript-aff-promise": "^2.1.0"
   }
 }
