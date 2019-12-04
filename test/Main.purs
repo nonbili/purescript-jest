@@ -3,19 +3,11 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import Example (sum, mkPoint, asyncSum)
-import Jest (describe, expectToBeClose, expectToBeFalse, expectToBeTrue, expectToEqual, expectToNotEqual, test)
+import Jest (expectToBeClose, expectToBeFalse, expectToBeTrue, expectToEqual, expectToNotEqual, test)
+import Test.Example as Example
 
 main :: Effect Unit
 main = do
-  describe "test Example module" $ do
-    test "sum" $ do
-      expectToEqual (sum 1 2) 3
-      expectToEqual (sum 22 11) 33
-
-    test "mkPoint" $ do
-      expectToEqual (mkPoint 1 2) { x: 1, y: 2 }
-
   test "expectToEqual" $ do
     expectToEqual { x: 1, y: 2 } { x: 1, y: 2}
 
@@ -33,6 +25,4 @@ main = do
   test "expectToBeFalse" $ do
     expectToBeFalse (3 < 2)
 
-  test "asyncSum" $ do
-    v <- asyncSum 1 2
-    expectToEqual v 3
+  Example.tests

@@ -15,3 +15,11 @@ A PureScript wrapper of [Jest](https://jestjs.io/).
 
 
 Check `test` folder to see how to use.
+
+## Development
+
+```
+yarn
+pulp -w build -I test
+yarn jest --watch
+```
