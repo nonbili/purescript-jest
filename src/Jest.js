@@ -1,47 +1,26 @@
-exports.describe_ = function(name, fn) {
-  describe(name, fn);
-};
+// `void` is used here to suppress the Jest warning:
+// > A "describe" callback must not return a value.
+exports.describe = name => fn => () => describe(name, () => void fn());
 
-exports.describeOnly_ = function(name, fn) {
-  describe.only(name, fn);
-};
+exports.describeOnly = name => fn => () => describe.only(name, () => void fn());
 
-exports.describeSkip_ = function(name, fn) {
-  describe.skip(name, fn);
-};
+exports.describeSkip = name => fn => () => describe.skip(name, () => void fn());
 
-exports.test_ = function(name, fn) {
-  test(name, fn);
-};
+exports.test_ = name => fn => () => test(name, fn);
 
-exports.testOnly_ = function(name, fn) {
-  test.only(name, fn);
-};
+exports.testOnly_ = name => fn => () => test.only(name, fn);
 
-exports.testSkip_ = function(name, fn) {
-  test.skip(name, fn);
-};
+exports.testSkip_ = name => fn => () => test.skip(name, fn);
 
-exports.expectToEqual_ = function() {
-  return function(received, expected) {
-    expect(received).toEqual(expected);
-  };
-};
+exports.expectToEqual_ = received => expected => () =>
+  expect(received).toEqual(expected);
 
-exports.expectToNotEqual_ = function() {
-  return function(received, expected) {
-    expect(received).not.toEqual(expected);
-  };
-};
+exports.expectToNotEqual_ = received => expected => () =>
+  expect(received).not.toEqual(expected);
 
-exports.expectToBeClose_ = function(received, expected) {
+exports.expectToBeClose_ = received => expected => () =>
   expect(received).toBeCloseTo(expected);
-};
 
-exports.expectToBeTrue_ = function(received) {
-  expect(received).toBe(true);
-};
+exports.expectToBeTrue_ = received => () => expect(received).toBe(true);
 
-exports.expectToBeFalse_ = function(received) {
-  expect(received).toBe(false);
-};
+exports.expectToBeFalse_ = received => () => expect(received).toBe(false);

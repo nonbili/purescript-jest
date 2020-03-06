@@ -18,49 +18,42 @@ import Control.Promise (Promise, fromAff)
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Class (liftEffect)
-import Effect.Uncurried (EffectFn1, EffectFn2, runEffectFn1, runEffectFn2)
 
-foreign import describe_ :: EffectFn2 String (Effect Unit) Unit
-describe :: String -> Effect Unit -> Effect Unit
-describe = runEffectFn2 describe_
+foreign import describe :: String -> Effect Unit -> Effect Unit
 
-foreign import describeOnly_ :: EffectFn2 String (Effect Unit) Unit
-describeOnly :: String -> Effect Unit -> Effect Unit
-describeOnly = runEffectFn2 describeOnly_
+foreign import describeOnly :: String -> Effect Unit -> Effect Unit
 
-foreign import describeSkip_ :: EffectFn2 String (Effect Unit) Unit
-describeSkip :: String -> Effect Unit -> Effect Unit
-describeSkip = runEffectFn2 describeSkip_
+foreign import describeSkip :: String -> Effect Unit -> Effect Unit
 
-foreign import test_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+foreign import test_ :: String -> Effect (Promise Unit) -> Effect Unit
 test :: String -> Aff Unit -> Effect Unit
-test name action = runEffectFn2 test_ name (fromAff action)
+test name action = test_ name (fromAff action)
 
-foreign import testOnly_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+foreign import testOnly_ :: String ->Effect (Promise Unit) -> Effect Unit
 testOnly :: String -> Aff Unit -> Effect Unit
-testOnly name action = runEffectFn2 testOnly_ name (fromAff action)
+testOnly name action = testOnly_ name (fromAff action)
 
-foreign import testSkip_ :: EffectFn2 String (Effect (Promise Unit)) Unit
+foreign import testSkip_ :: String -> Effect (Promise Unit) -> Effect Unit
 testSkip :: String -> Aff Unit -> Effect Unit
-testSkip name action = runEffectFn2 testSkip_ name (fromAff action)
+testSkip name action = testSkip_ name (fromAff action)
 
-foreign import expectToEqual_ :: forall a. Eq a => EffectFn2 a a Unit
+foreign import expectToEqual_ :: forall a. a -> a -> Effect Unit
 expectToEqual :: forall a. Eq a => a -> a -> Aff Unit
-expectToEqual = (compose liftEffect) <<< runEffectFn2 expectToEqual_
+expectToEqual a b = liftEffect $ expectToEqual_ a b
 
-foreign import expectToNotEqual_ :: forall a. Eq a => EffectFn2 a a Unit
+foreign import expectToNotEqual_ :: forall a. a -> a -> Effect Unit
 expectToNotEqual :: forall a. Eq a => a -> a -> Aff Unit
-expectToNotEqual = (compose liftEffect) <<< runEffectFn2 expectToNotEqual_
+expectToNotEqual a b = liftEffect $ expectToNotEqual_ a b
 
 -- | https://jestjs.io/docs/en/expect#tobeclosetonumber-numdigits
-foreign import expectToBeClose_ :: EffectFn2 Number Number Unit
+foreign import expectToBeClose_ :: Number -> Number -> Effect Unit
 expectToBeClose :: Number -> Number -> Aff Unit
-expectToBeClose = (compose liftEffect) <<< runEffectFn2 expectToBeClose_
+expectToBeClose a b = liftEffect$ expectToBeClose_ a b
 
-foreign import expectToBeTrue_ :: EffectFn1 Boolean Unit
+foreign import expectToBeTrue_ :: Boolean -> Effect Unit
 expectToBeTrue :: Boolean -> Aff Unit
-expectToBeTrue = liftEffect <<< runEffectFn1 expectToBeTrue_
+expectToBeTrue = liftEffect <<< expectToBeTrue_
 
-foreign import expectToBeFalse_ :: EffectFn1 Boolean Unit
+foreign import expectToBeFalse_ :: Boolean -> Effect Unit
 expectToBeFalse :: Boolean -> Aff Unit
-expectToBeFalse = liftEffect <<< runEffectFn1 expectToBeFalse_
+expectToBeFalse = liftEffect <<< expectToBeFalse_

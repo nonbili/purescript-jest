@@ -7,7 +7,7 @@
     "test:ci": "pulp build -I test -- --strict --stash +RTS -N2 -RTS"
   },
   "devDependencies": {
-    "jest": "^23.4.2",
+    "jest": "^25.1.0",
     "purescript-psa": "^0.7.3"
   }
 }
