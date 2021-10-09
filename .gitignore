@@ -5,4 +5,6 @@ yarn.lock
 .psa-stash
 .psci_modules
 .psc-ide-port
+.purs-repl
+.spago
 output

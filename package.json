@@ -2,9 +2,8 @@
   "private": true,
   "license": "BSD-3-Clause",
   "scripts": {
-    "postinstall": "bower install",
-    "test": "pulp build -I test && jest",
-    "test:ci": "pulp build -I test -- --strict --stash +RTS -N2 -RTS"
+    "build": "spago build -u '--strict --stash +RTS -N2 -RTS'",
+    "test": "spago build && jest"
   },
   "devDependencies": {
     "jest": "^25.1.0",
