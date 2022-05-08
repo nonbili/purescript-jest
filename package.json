@@ -1,9 +1,10 @@
 {
   "private": true,
+  "type": "module",
   "license": "BSD-3-Clause",
   "scripts": {
     "build": "spago build -u '--strict --stash +RTS -N2 -RTS'",
-    "test": "spago build && jest"
+    "test": "spago build && NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
     "jest": "^25.1.0",
