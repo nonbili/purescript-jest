@@ -13,11 +13,10 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
       - name: Build
         run: |
           yarn add purescript spago
-          yarn spago build
       - name: Test
         run: |
-          yarn jest
+          yarn test

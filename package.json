@@ -3,11 +3,10 @@
   "type": "module",
   "license": "BSD-3-Clause",
   "scripts": {
-    "build": "spago build -u '--strict --stash +RTS -N2 -RTS'",
+    "build": "spago build",
     "test": "spago build && NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
-    "jest": "^25.1.0",
-    "purescript-psa": "^0.7.3"
+    "jest": "^28.1.0"
   }
 }
