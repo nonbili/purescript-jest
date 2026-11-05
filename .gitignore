@@ -8,3 +8,4 @@ yarn.lock
 .purs-repl
 .spago
 output
+spago.lock

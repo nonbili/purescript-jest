@@ -1,0 +1,20 @@
+package:
+  name: jest
+  description: A PureScript wrapper of Jest
+  publish:
+    version: 1.0.1
+    license: BSD-3-Clause
+    location:
+      githubOwner: nonbili
+      githubRepo: purescript-jest
+  dependencies:
+    - aff: ">=6.0.0 <9.0.0"
+    - aff-promise: ">=3.0.0 <5.0.0"
+    - effect: ">=3.0.0 <5.0.0"
+    - prelude: ">=5.0.0 <7.0.0"
+  test:
+    main: Test.Main
+    dependencies:
+      - foldable-traversable: ">=6.0.0 <7.0.0"
+      - psci-support: ">=6.0.0 <7.0.0"
+workspace: {}
